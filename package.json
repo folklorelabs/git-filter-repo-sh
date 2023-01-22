@@ -1,0 +1,20 @@
+{
+  "name": "git-filter-repo-sh",
+  "version": "1.0.0",
+  "description": "Shell script for mass re-writing author meta-data on all git commits in a branch via git-filter-repo.",
+  "engines": {
+    "node": "16.14.0"
+  },
+  "engineStrict": true,
+  "scripts": {
+    "start": "bash index.sh"
+  },
+  "author": "Folklore Labs",
+  "license": "ISC",
+  "dependencies": {
+
+  },
+  "devDependencies": {
+
+  }
+}
