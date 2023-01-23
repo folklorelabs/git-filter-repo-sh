@@ -17,7 +17,7 @@ COLOR_AQUA=$(tput setaf 6)
 COLOR_WHITE=$(tput setaf 7)
 COLOR_RESET=$(tput sgr0)
 
-TEMP_DIR="/gitfilterreposh"
+TEMP_DIR="gitfilterreposh"
 if test -d "$TMPDIR"; then
     TEMP_DIR="$TMPDIR/$TEMP_DIR"
 elif test -d "$TMP/$TEMP_DIR"; then
