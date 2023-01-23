@@ -154,22 +154,22 @@ git clone -b "$TARGET_BRANCH" "$GIT_REPO" "$TEMP_DIR"
 if [ "$VERBOSE" = "true" ]; then
     printf "${COLOR_WHITE}%s${COLOR_RESET}\n" "Rewriting git history..."
 fi
-git filter-repo --mailmap "$MAILMAP_FILE"
+git filter-repo --mailmap "$MAILMAP_FILE" --path "$TEMP_DIR"
 
 # Push to remote
 if [ "$VERBOSE" = "true" ]; then
     printf "${COLOR_WHITE}%s${COLOR_RESET}\n" "Pushing changes to remote..."
 fi
 pushd "$TEMP_DIR"
-# git remote add origin "$GIT_REPO"
-# git push origin "$TARGET_BRANCH" -f
-# popd
+git remote add origin "$GIT_REPO"
+git push origin "$TARGET_BRANCH" -f
+popd
 
-# # Clean up
-# if [ "$VERBOSE" = "true" ]; then
-#     printf "${COLOR_WHITE}%s${COLOR_RESET}\n" "Removing temp file ($TEMP_DIR)..."
-# fi
-# rm -rf "$TEMP_DIR"
+# Clean up
+if [ "$VERBOSE" = "true" ]; then
+    printf "${COLOR_WHITE}%s${COLOR_RESET}\n" "Removing temp file ($TEMP_DIR)..."
+fi
+rm -rf "$TEMP_DIR"
 
 
-# printf "\n${COLOR_GREEN}%s${COLOR_RESET}\n" "Successfully rewrote history of $GIT_REPO."
+printf "\n${COLOR_GREEN}%s${COLOR_RESET}\n" "Successfully rewrote history of $GIT_REPO."
