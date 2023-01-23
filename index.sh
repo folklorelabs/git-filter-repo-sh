@@ -18,7 +18,7 @@ COLOR_AQUA=$(tput setaf 6)
 COLOR_WHITE=$(tput setaf 7)
 COLOR_RESET=$(tput sgr0)
 
-TEMP_DIR=".git-rewrite-temp"
+TEMP_DIR="temp"
 
 HELP_USAGE="
 Usage: $(basename "$0") <repo> [-b <branch>] [-m <mailmap>] [-h] [-f] [-v]
