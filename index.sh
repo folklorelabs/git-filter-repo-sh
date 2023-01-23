@@ -4,7 +4,7 @@
 # Constants
 # xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 DEFAULT_TARGET_BRANCH="main"
-DEFAULT_MAILMAP_FILE="./mailmap"
+DEFAULT_MAILMAP_FILE="$PWD/mailmap"
 DEFAULT_HELP="false"
 DEFAULT_VERBOSE="false"
 
@@ -145,6 +145,7 @@ fi
 # xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 # Clone and traverse
+pushd "$TEMP_DIR"
 if [ "$VERBOSE" = "true" ]; then
     printf "${COLOR_WHITE}%s${COLOR_RESET}\n" "Cloning git repo to $GIT_REPO..."
 fi
@@ -160,7 +161,7 @@ git filter-repo --mailmap "$MAILMAP_FILE"
 if [ "$VERBOSE" = "true" ]; then
     printf "${COLOR_WHITE}%s${COLOR_RESET}\n" "Pushing changes to remote..."
 fi
-pushd "$TEMP_DIR"
+
 git remote add origin "$GIT_REPO"
 git push origin "$TARGET_BRANCH" -f
 popd
