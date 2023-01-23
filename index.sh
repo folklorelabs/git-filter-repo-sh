@@ -5,7 +5,6 @@
 # xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 DEFAULT_TARGET_BRANCH="main"
 DEFAULT_MAILMAP_FILE="./mailmap"
-DEFAULT_FORCE="false"
 DEFAULT_HELP="false"
 DEFAULT_VERBOSE="false"
 
@@ -31,7 +30,6 @@ HELP_OPTIONS="
 Options:
     -b  --branch    Branch to rewrite           [string][default: \"main\"]
     -m  --mailmap   Path to mailmap file        [string][default: \"../mailmap\"]
-    -f  --force     Force filter-repo command   [boolean]
     -h  --help      Show this help text         [boolean]
     -v  --verbose   Show additional logging     [boolean]
 "
@@ -63,10 +61,6 @@ while [[ $# -gt 0 ]]; do
       MAILMAP_FILE="$2"
       shift # past argument
       shift # past value
-      ;;
-    -f|--force)
-      FORCE="true"
-      shift # past argument
       ;;
     -h|--help)
       HELP="true"
@@ -104,7 +98,6 @@ set -- "${POSITIONAL_ARGS[@]}" # restore positional parameters
 GIT_REPO="${POSITIONAL_ARGS[0]}"
 TARGET_BRANCH="${TARGET_BRANCH:-$DEFAULT_TARGET_BRANCH}"
 MAILMAP_FILE="${MAILMAP_FILE:-$DEFAULT_MAILMAP_FILE}"
-FORCE="${FORCE:-$DEFAULT_FORCE}"
 HELP="${HELP:-$DEFAULT_HELP}"
 VERBOSE="${VERBOSE:-$DEFAULT_VERBOSE}"
 
@@ -118,7 +111,6 @@ Variables:
     GIT_REPO        \"$GIT_REPO\"
     TARGET_BRANCH   \"$TARGET_BRANCH\"
     MAILMAP         \"$MAILMAP_FILE\"
-    FORCE           $FORCE
     HELP            $HELP
     VERBOSE         $VERBOSE
 "
