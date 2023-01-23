@@ -145,24 +145,9 @@ fi
 
 # Clone and traverse
 if [ "$VERBOSE" = "true" ]; then
-    printf "${COLOR_WHITE}%s${COLOR_RESET}\n" "Cloning git repo to $TEMP_REPO..."
+    printf "${COLOR_WHITE}%s${COLOR_RESET}\n" "Cloning git repo to $GIT_REPO..."
 fi
-git clone "$TEMP_REPO" "$TEMP_DIR"
-pushd "$TEMP_DIR"
-
-# Switch branch if necessary
-curBranch="$(git symbolic-ref HEAD 2>/dev/null)" ||
-curBranch="(unnamed branch)"
-curBranch=${curBranch##refs/heads/}
-if [ "$VERBOSE" = "true" ]; then
-    printf "${COLOR_WHITE}%s${COLOR_RESET}\n" "Current branch: $currentBranch"
-fi
-if [ "$curBranch" = "$TARGET_BRANCH" ]; then
-    if [ "$VERBOSE" = "true" ]; then
-        printf "${COLOR_WHITE}%s${COLOR_RESET}\n" "Changing branch to $TARGET_BRANCH..."
-    fi
-    git checkout "$TARGET_BRANCH"
-fi
+git clone -b "$TARGET_BRANCH" "$GIT_REPO" "$TEMP_DIR"
 
 # Rewrite the metadata
 if [ "$VERBOSE" = "true" ]; then
@@ -174,11 +159,12 @@ git filter-repo --mailmap "$MAILMAP_FILE" --force
 if [ "$VERBOSE" = "true" ]; then
     printf "${COLOR_WHITE}%s${COLOR_RESET}\n" "Pushing changes to remote..."
 fi
-git remote add origin "$TEMP_REPO"
-git push --set-upstream origin "$TARGET_BRANCH" -f
+pushd "$TEMP_DIR"
+git remote add origin "$GIT_REPO"
+git push --set-upstream origin "$TARGET_BRANCH"
+popd
 
 # Clean up
-popd
 if [ "$VERBOSE" = "true" ]; then
     printf "${COLOR_WHITE}%s${COLOR_RESET}\n" "Removing temp file ($TEMP_DIR)..."
 fi
