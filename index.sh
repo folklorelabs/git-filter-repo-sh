@@ -154,7 +154,7 @@ git clone -b "$TARGET_BRANCH" "$GIT_REPO" "$TEMP_DIR"
 if [ "$VERBOSE" = "true" ]; then
     printf "${COLOR_WHITE}%s${COLOR_RESET}\n" "Rewriting git history..."
 fi
-git filter-repo --mailmap "$MAILMAP_FILE" --path "$TEMP_DIR"
+git filter-repo --mailmap "$MAILMAP_FILE"
 
 # Push to remote
 if [ "$VERBOSE" = "true" ]; then
