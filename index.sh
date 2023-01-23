@@ -17,14 +17,15 @@ COLOR_AQUA=$(tput setaf 6)
 COLOR_WHITE=$(tput setaf 7)
 COLOR_RESET=$(tput sgr0)
 
+TEMP_DIR="/gitfilterreposh"
 if test -d "$TMPDIR"; then
-    TEMP_DIR="$TMPDIR"
-elif test -d "$TMP"; then
-    TEMP_DIR=$TMP
-elif test -d /var/tmp; then
-    TEMP_DIR=/var/tmp
+    TEMP_DIR="$TMPDIR/$TEMP_DIR"
+elif test -d "$TMP/$TEMP_DIR"; then
+    TEMP_DIR="$TMP/$TEMP_DIR"
+elif test -d "/var/tmp"; then
+    TEMP_DIR="/var/tmp/$TEMP_DIR"
 else
-    TEMP_DIR=/tmp
+    TEMP_DIR="/tmp/$TEMP_DIR"
 fi
 
 HELP_USAGE="
