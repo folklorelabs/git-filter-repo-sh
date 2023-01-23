@@ -160,10 +160,7 @@ git filter-repo --mailmap "$MAILMAP_FILE"
 if [ "$VERBOSE" = "true" ]; then
     printf "${COLOR_WHITE}%s${COLOR_RESET}\n" "Pushing changes to remote..."
 fi
-pushd "$TEMP_DIR"
-git remote add origin "$GIT_REPO"
-git push origin "$TARGET_BRANCH" -f
-popd
+pushd "$TEMP_DIR" && git remote add origin "$GIT_REPO" && git push origin "$TARGET_BRANCH" -f && popd
 
 # Clean up
 if [ "$VERBOSE" = "true" ]; then
