@@ -161,7 +161,7 @@ if [ "$VERBOSE" = "true" ]; then
 fi
 pushd "$TEMP_DIR"
 git remote add origin "$GIT_REPO"
-git push --set-upstream origin "$TARGET_BRANCH" -f
+git push origin "$TARGET_BRANCH" -f
 popd
 
 # Clean up
